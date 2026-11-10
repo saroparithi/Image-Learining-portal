@@ -1,0 +1,8 @@
+{
+  "name": "image-creative-student-portal",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": { "dev": "vite", "build": "vite build", "preview": "vite preview", "test:api": "docker compose run --rm api pytest -q" },
+  "devDependencies": { "@vitejs/plugin-react": "latest", "vite": "latest", "react": "latest", "react-dom": "latest", "lucide-react": "latest" },
+  "dependencies": {}
+}

@@ -1,0 +1,10 @@
+.liveWorkspaceSummary{margin:12px 0 0;padding:12px 18px;display:flex;align-items:center;justify-content:space-between;gap:20px;border:1px solid #dbe6f5;border-radius:14px;background:#fff;box-shadow:0 8px 24px rgba(38,74,120,.06);box-sizing:border-box;width:100%}
+.liveWorkspaceSummary>div:first-child{display:flex;flex-direction:column;gap:3px;color:#263653}.liveWorkspaceSummary .eyebrow{font-size:10px;color:#5e7daf;letter-spacing:.12em}.liveWorkspaceSummary strong{text-transform:capitalize;font-size:14px}.liveWorkspaceMetrics{display:flex;gap:24px;flex-wrap:wrap}.liveWorkspaceMetrics span{display:flex;flex-direction:column;gap:2px;color:#71819b;font-size:10px;text-transform:capitalize}.liveWorkspaceMetrics b{font-size:17px;color:#273b62}@media(max-width:900px){.liveWorkspaceSummary{margin:10px 14px}.liveWorkspaceMetrics{gap:12px}}
+.workspacePanels{width:calc(100% - 246px);max-width:none;margin:0 0 0 246px;padding:0 24px 28px;box-sizing:border-box}
+.panelHost{width:calc(100% - 246px);margin-left:246px;padding:0 24px 28px;box-sizing:border-box}
+@media(max-width:760px){.workspacePanels{width:100%;margin-left:0;padding:0 16px 24px}}
+.panelHost{max-width:100%;overflow:hidden}
+@media(max-width:760px){.panelHost{width:100%;margin-left:0;padding:0 16px 24px}}
+.facultyActionPanel{margin-left:0;margin-right:0;box-sizing:border-box}
+.sessionLogout{top:68px}
+@media(max-width:720px){.facultyActionPanel{margin-left:0;margin-right:0}}

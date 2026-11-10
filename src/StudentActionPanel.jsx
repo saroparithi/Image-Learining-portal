@@ -1,0 +1,14 @@
+import React, {useEffect, useState} from 'react';
+import {api} from './services/api';
+
+export default function StudentActionPanel() {
+  const [role, setRole] = useState(() => localStorage.getItem('image-lms-role') || 'Student');
+  const [items, setItems] = useState([]); const [open, setOpen] = useState(false); const [form, setForm] = useState({assignment_id:'', submission_url:'', notes:''}); const [message, setMessage] = useState('');
+  useEffect(() => { const timer = window.setInterval(() => setRole(localStorage.getItem('image-lms-role') || 'Student'), 250); return () => window.clearInterval(timer); }, []);
+  useEffect(() => { if (role === 'Student') api.assignments().then(result => { const next = result.items || []; setItems(next); const actionable = next.filter(item => item.status !== 'submitted' && item.status !== 'graded'); setForm(value => ({...value, assignment_id: value.assignment_id || actionable[0]?.id || ''})); }).catch(() => setItems([])); }, [role]);
+  if (role !== 'Student' || !items.length) return null;
+  const actionable = items.filter(item => item.status !== 'submitted' && item.status !== 'graded');
+  async function submit(event) { event.preventDefault(); setMessage(''); try { await api.submitAssignment(form); setMessage('Assignment submitted successfully.'); setOpen(false); setItems(items.filter(item => item.id !== form.assignment_id)); } catch { setMessage('Unable to submit assignment.'); } }
+  const graded = items.filter(item => item.status === 'graded'); const latestGrade = graded[0];
+  return <section className="facultyActionPanel"><div><span className="eyebrow">LEARNING ACTION</span><strong>{actionable.length ? `${actionable.length} assignment${actionable.length === 1 ? '' : 's'} ready to submit` : 'Assignment progress'}</strong><p>{graded.length} graded{latestGrade?.score != null ? ` · Latest score ${latestGrade.score}/${latestGrade.max_score || 100}` : ''} · {items.filter(item => item.status === 'submitted').length} submitted · {actionable.length} awaiting work</p></div><button className="workspaceAction" onClick={() => setOpen(value => !value)} disabled={!actionable.length}>Submit work</button>{open && <form className="workspaceForm" onSubmit={submit}><select required value={form.assignment_id} onChange={e => setForm({...form, assignment_id:e.target.value})}>{actionable.map(item => <option key={item.id} value={item.id}>{item.title}</option>)}</select><input required type="url" placeholder="Project URL" value={form.submission_url} onChange={e => setForm({...form, submission_url:e.target.value})}/><input placeholder="Notes" value={form.notes} onChange={e => setForm({...form, notes:e.target.value})}/><button type="submit">Submit assignment</button></form>}{message && <span className="facultyActionMessage">{message}</span>}</section>;
+}

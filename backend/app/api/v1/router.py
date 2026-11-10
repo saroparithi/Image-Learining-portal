@@ -1,0 +1,22 @@
+from fastapi import APIRouter
+from app.api.v1 import assignments, attendance, audit, auth, batches, branches, certificates, courses, dashboard, enrollments, exams, faculty, lessons, notifications, resources, sessions, students, workspaces
+
+api_router = APIRouter()
+api_router.include_router(auth.router, prefix="/auth", tags=["auth"])
+api_router.include_router(branches.router, prefix="/branches", tags=["branches"])
+api_router.include_router(courses.router, prefix="/courses", tags=["courses"])
+api_router.include_router(dashboard.router, prefix="/reports", tags=["reports"])
+api_router.include_router(workspaces.router, prefix="/workspaces", tags=["workspaces"])
+api_router.include_router(students.router, prefix="/students", tags=["students"])
+api_router.include_router(assignments.router, prefix="/assignments", tags=["assignments"])
+api_router.include_router(attendance.router, prefix="/attendance", tags=["attendance"])
+api_router.include_router(certificates.router, prefix="/certificates", tags=["certificates"])
+api_router.include_router(exams.router, prefix="/exams", tags=["exams"])
+api_router.include_router(notifications.router, prefix="/notifications", tags=["notifications"])
+api_router.include_router(resources.router, prefix="/resources", tags=["resources"])
+api_router.include_router(lessons.router, prefix="/lessons", tags=["lessons"])
+api_router.include_router(batches.router, prefix="/batches", tags=["batches"])
+api_router.include_router(enrollments.router, prefix="/enrollments", tags=["enrollments"])
+api_router.include_router(faculty.router, prefix="/faculty", tags=["faculty"])
+api_router.include_router(audit.router, prefix="/audit", tags=["audit"])
+api_router.include_router(sessions.router, prefix="/sessions", tags=["sessions"])
